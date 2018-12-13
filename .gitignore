@@ -1,0 +1,6 @@
+node_modules
+src/giftuh/downloaded_images/*
+!src/giftuh/downloaded_images/.gitkeep
+
+.env
+.idea/
