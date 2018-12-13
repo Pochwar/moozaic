@@ -10,7 +10,7 @@ export default class Server {
     this._app.use(express.static(path.join(__dirname, '/../public')))
 
     // set app port
-    this.port = 2440;
+    this.port = process.env.PORT || 2440;
 
     // Routes
     this._app.get('/', function (req, res) {
