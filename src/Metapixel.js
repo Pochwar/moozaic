@@ -24,6 +24,7 @@ export default class Metapixel {
 
           if (files.length < 50) {
             console.log('Not enough files, need at least 50 files.')
+            resolve()
           } else {
             this.mozaic(source_folder, 250, 250, original, 3)
               .then(() => {
@@ -51,6 +52,11 @@ export default class Metapixel {
 
     console.log('\nCleaning miniatures')
     var { stdout, stderr } = await exec('/bin/rm -f src/metapixel/tmp_img/*');
+    console.log('stdout:', stdout)
+    console.log('stderr:', stderr)
+
+    console.log('\nRecreate .gitkeep')
+    var { stdout, stderr } = await exec('/bin/touch src/metapixel/tmp_img/.gitkeep');
     console.log('stdout:', stdout)
     console.log('stderr:', stderr)
   }
