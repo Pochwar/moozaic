@@ -1,4 +1,4 @@
 metapixel
-libpng
-jpeg
-giflib
+libpng-dev
+libjpeg-dev
+giflib-tools
