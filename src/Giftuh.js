@@ -72,7 +72,7 @@ export default class Giftuh {
 
       stream.on('error', function(error) {
         this.consoleError(`Error: ${error}`)
-      })
+      }.bind(this))
     }.bind(this))
   }
 
