@@ -20,21 +20,23 @@ const tw_options = {
 const server = new Server()
 server.run()
 
+console.log('TEST MODE')
+
 // Get Images From Twitter Using Hashtag
 const giftuh = new Giftuh(tw_options)
-giftuh.run(keyword)
+//giftuh.run(keyword)
 
 // Build mozaic using metapixel
-const metapixel = new Metapixel()
-console.log(`RUN METAPIXEL EVERY ${periodicity} MINUTES`)
-schedule.scheduleJob(`*/${periodicity}  * * * *`, function() {
-  giftuh.mute()
-  metapixel.run(library, keyword, original)
-    .then(() => {
-      giftuh.unmute()
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
-})
+// const metapixel = new Metapixel()
+// console.log(`RUN METAPIXEL EVERY ${periodicity} MINUTES`)
+// schedule.scheduleJob(`*/${periodicity}  * * * *`, function() {
+//   giftuh.mute()
+//   metapixel.run(library, keyword, original)
+//     .then(() => {
+//       giftuh.unmute()
+//     })
+//     .catch(err => {
+//       console.log(err)
+//     })
+//
+// })
