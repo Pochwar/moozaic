@@ -1,6 +1,6 @@
-metapixel
-libpng-dev
-libjpeg-dev
-libgif-dev
-xsltproc
-docbook-xsl-ns
+#metapixel
+#libpng-dev
+#libjpeg-dev
+#libgif-dev
+#xsltproc
+#docbook-xsl-ns
