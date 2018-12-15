@@ -1,8 +1,8 @@
 metapixel
-libpng-dev
-libjpeg-dev
-libgif-dev
-xsltproc
-docbook-xsl-ns
-libperl-dev
-libgtk2.0-dev
+#libpng-dev
+#libjpeg-dev
+#libgif-dev
+#xsltproc
+#docbook-xsl-ns
+#libperl-dev
+#libgtk2.0-dev
