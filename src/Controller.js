@@ -1,14 +1,22 @@
+import _ from 'lodash'
 import ProjectRepository from "repositories/ProjectRepository"
+import ContributionRepository from "repositories/ContributionRepository"
 
 export default class Controller {
   constructor() {
     this.projectRepository = new ProjectRepository();
+    this.contributionRepository = new ContributionRepository();
   }
 
   async index(req, res) {
     const project = await this.projectRepository.getLastProject()
+    const contributions = await this.contributionRepository.getContributionsByProject(project.id)
+    const contributors = contributions.map(contribution => {
+      return contribution.tweet.user.name
+    })
     res.render('index.ejs', {
       project: project,
+      contributors: _.uniq(contributors)
     })
   }
 

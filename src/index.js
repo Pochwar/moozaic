@@ -26,14 +26,14 @@ dbConnector.connect()
     // Get Images From Twitter Using Hashtag
     const giftuh = new Giftuh()
     if(conf.run_giftuh == 1) {
-      giftuh.run(project.keyword)
+      giftuh.run(project)
       // check if project has changed
       setInterval(async function() {
         const actualProject = await projectRepository.getLastProject()
         if (actualProject.id != project.id) {
-          giftuh.stop(project.keyword)
+          giftuh.stop()
           project = actualProject
-          giftuh.run(project.keyword)
+          giftuh.run(project)
         }
       }, 1000)
     } else {

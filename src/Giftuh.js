@@ -2,6 +2,7 @@ import Twitter from 'twitter'
 import download from 'image-downloader'
 import mkdirp from 'mkdirp'
 import fs from 'fs'
+import ContributionRepository from 'repositories/ContributionRepository'
 
 import conf from 'config'
 
@@ -15,9 +16,11 @@ export default class Giftuh {
     })
     this.muteStream = false
     this._stream = {}
+    this._contributionRepository = new ContributionRepository()
   }
 
-  run(keyword) {
+  run(project) {
+    const keyword = project.keyword
     console.log('########################################')
     console.log(`# Looking for "${keyword}" images`)
     console.log('########################################')
@@ -67,6 +70,11 @@ export default class Giftuh {
                 download.image(options)
                   .then(({filename, image}) => {
                     this.consoleLogGreen(`File saved to: ${filename}`)
+                    // save contributor in DB
+                    this._contributionRepository.createContribution({
+                      tweet: event,
+                      project_id: project.id
+                    })
                   })
                   .catch((err) => {
                     this.consoleError(err)

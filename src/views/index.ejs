@@ -9,14 +9,30 @@
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-<h1>Welcome to Moosaik :)</h1>
-<h2>Project name: <%= project.name %></h2>
-<p>Released on: <%= project._id.getTimestamp() %></p>
-<a href="img/mozaic_<%= project.id %>.png"><img src="img/mozaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px" target="_blank"></a>
-<h4>Original file:</h4>
-<a href="originals/<%= project.original %>"><img src="originals/<%= project.original %>" alt="original file" width="250px" target="_blank"></a>
-<h4>Keyword: #<%= project.keyword %></h4>
-<p>Contribute to this project sharing pictures on <a href="https://twitter.com">Twitter</a> using this keyword!</p>
+<header>
+  <h1>Welcome to Moosaik :)</h1>
+</header>
+<main>
+  <article>
+    <h2>Project name: <%= project.name %></h2>
+    <p>Released on: <%= project._id.getTimestamp().toDateString() %></p>
+    <a href="img/mozaic_<%= project.id %>.png"><img src="img/mozaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px" target="_blank"></a>
+    <h4>Original file:</h4>
+    <a href="originals/<%= project.original %>"><img src="originals/<%= project.original %>" alt="original file" width="250px" target="_blank"></a>
+    <h4>Keyword: #<%= project.keyword %></h4>
+    <p>Contribute to this project sharing pictures on <a href="https://twitter.com">Twitter</a> using this keyword!</p>
+  </article>
+
+  <aside>
+    <h3>stats</h3>
+    <%= contributors.length %> contributors
+    <ul>
+      <% contributors.forEach(function(contributor){ %>
+      <li><%= contributor %></li>
+      <% }); %>
+    </ul>
+  </aside>
+</main>
 
 </body>
 <script>
