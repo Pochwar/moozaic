@@ -9,10 +9,14 @@
 </head>
 <body>
 <h1>Welcome to Moosaik :)</h1>
-<h2>test <%= project.name %></h2>
-<img src="img/mozai.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px">
+<h2>Project name: <%= project.name %></h2>
+<h3>Original file: <%= project.original %></h3>
+<h3>Keyword: #<%= project.keyword %></h3>
+<p>Released on: <%= project._id.getTimestamp() %></p>
+<img src="img/mozaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px">
 </body>
-<script src="js/app.js">
-
+<script>
+  var img = "img/mozaic_<%= project.id %>.png"
 </script>
+<script src="js/app.js"></script>
 </html>
