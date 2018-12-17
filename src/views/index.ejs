@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Moosaik</title>
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Moosaik</title>
+  <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
 <h1>Welcome to Moosaik :)</h1>
 <h2>Project name: <%= project.name %></h2>
-<h3>Original file: <a href="originals/<%= project.original %>"><%= project.original %></a></h3>
-<h3>Keyword: #<%= project.keyword %></h3>
 <p>Released on: <%= project._id.getTimestamp() %></p>
-<img src="img/mozaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px">
+<a href="img/mozaic_<%= project.id %>.png"><img src="img/mozaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px" target="_blank"></a>
+<h4>Original file:</h4>
+<a href="originals/<%= project.original %>"><img src="originals/<%= project.original %>" alt="original file" width="250px" target="_blank"></a>
+<h4>Keyword: #<%= project.keyword %></h4>
+<p>Contribute to this project sharing pictures on <a href="https://twitter.com">Twitter</a> using this keyword!</p>
+
 </body>
 <script>
   var img = "img/mozaic_<%= project.id %>.png"
