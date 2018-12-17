@@ -1,11 +1,6 @@
-
-
 var util = require('util')
 var exec = util.promisify(require('child_process').exec)
 const fs = require('fs')
-
-
-
 
 export default class Metapixel {
   run(library, keyword, original) {

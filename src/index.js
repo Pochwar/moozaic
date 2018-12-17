@@ -1,40 +1,71 @@
-require('dotenv').config()
 import schedule from 'node-schedule'
 import Server from 'Server'
+import DBConnector from 'DBConnector'
 import Metapixel from 'Metapixel'
 import Giftuh from 'Giftuh'
+import ProjectRepository from "repositories/ProjectRepository"
 
 // Configuration
-const keyword = process.env.APP_KEYWORD
+import conf from 'config'
 const library = './src/giftuh/downloaded_images'
-const periodicity = process.env.MTPX_PERIODICITY
-const original = `./src/metapixel/${process.env.MTPX_ORIGINAL}`
-const tw_options = {
-  consumer_key:process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret:process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key:process.env.TWITTER_ACCESS_TOKEN_KEY,
-  access_token_secret:process.env.TWITTER_ACCESS_TOKEN_SECRET
-}
 
-// Launch server
-const server = new Server()
-server.run()
+// Connect to DB
+const dbConnector = new DBConnector()
+dbConnector.connect()
+  .then(async msg => {
+    console.log(msg)
 
-// Get Images From Twitter Using Hashtag
-const giftuh = new Giftuh(tw_options)
-giftuh.run(keyword)
+    // get project
+    const projectRepository = new ProjectRepository()
+    let project = await projectRepository.getLastProject()
 
-// Build mozaic using metapixel
-const metapixel = new Metapixel()
-console.log(`RUN METAPIXEL EVERY ${periodicity} MINUTES`)
-schedule.scheduleJob(`*/${periodicity}  * * * *`, function() {
-  giftuh.mute()
-  metapixel.run(library, keyword, original)
-    .then(() => {
-      giftuh.unmute()
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    // Launch server
+    const server = new Server()
+    server.run()
 
-})
+    // Get Images From Twitter Using Hashtag
+    const giftuh = new Giftuh()
+    if(conf.run_giftuh == 1) {
+      giftuh.run(project.keyword)
+      // check if project has changed
+      setInterval(async function() {
+        const actualProject = await projectRepository.getLastProject()
+        if (actualProject.id != project.id) {
+          giftuh.stop(project.keyword)
+          project = actualProject
+          giftuh.run(project.keyword)
+        }
+      }, 1000)
+    } else {
+      console.log('Giftuh process: OFF')
+    }
+
+    // Build mozaic using metapixel
+    const metapixel = new Metapixel()
+    if(conf.run_metapixel == 1) {
+      console.log(`RUN METAPIXEL EVERY ${conf.mtpx_periodicity} MINUTES`)
+      schedule.scheduleJob(`*/${conf.mtpx_periodicity}  * * * *`, async function() {
+        // Mute Giftuh stream
+        giftuh.mute()
+
+        // Get project
+        const project = await projectRepository.getLastProject()
+        const original = `./src/metapixel/${project.original}`
+
+        // Run metapixel
+        metapixel.run(library, project.keyword, original)
+          .then(() => {
+            giftuh.unmute()
+          })
+          .catch(err => {
+            console.log(err)
+          })
+
+      })
+    }else {
+      console.log('Metapixel process: OFF')
+    }
+  })
+  .catch(err => {
+    console.log(err)
+  })

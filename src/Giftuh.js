@@ -3,10 +3,18 @@ import download from 'image-downloader'
 import mkdirp from 'mkdirp'
 import fs from 'fs'
 
+import conf from 'config'
+
 export default class Giftuh {
-  constructor(tw_options) {
-    this.client = new Twitter(tw_options)
+  constructor() {
+    this.client = new Twitter({
+      consumer_key:conf.tw_ck,
+      consumer_secret:conf.tw_cs,
+      access_token_key:conf.tw_atk,
+      access_token_secret:conf.tw_ats
+    })
     this.muteStream = false
+    this._stream = {}
   }
 
   run(keyword) {
@@ -15,6 +23,7 @@ export default class Giftuh {
     console.log('########################################')
 
     this.client.stream('statuses/filter', {track: keyword}, function(stream) {
+      this._stream = stream
       stream.on('data', function(event) {
         var user_id = event.user.id
         var user_name = event.user.screen_name
@@ -74,6 +83,13 @@ export default class Giftuh {
         this.consoleError(`Error: ${error}`)
       }.bind(this))
     }.bind(this))
+  }
+
+  stop() {
+    console.log('########################################')
+    console.log(`# Stop Stream`)
+    console.log('########################################')
+    this._stream.destroy()
   }
 
   mute() {
