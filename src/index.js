@@ -50,7 +50,7 @@ dbConnector.connect()
 
         // Get project
         const project = await projectRepository.getLastProject()
-        const original = `./src/metapixel/${project.original}`
+        const original = `./src/metapixel/originals/${project.original}`
 
         // Run metapixel
         metapixel.run(library, project.keyword, original, project.id)
