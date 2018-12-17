@@ -53,7 +53,7 @@ dbConnector.connect()
         const original = `./src/metapixel/${project.original}`
 
         // Run metapixel
-        metapixel.run(library, project.keyword, original)
+        metapixel.run(library, project.keyword, original, project.id)
           .then(() => {
             giftuh.unmute()
           })
