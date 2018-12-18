@@ -9,6 +9,7 @@ const ProjectSchema = new Schema(
     id: {type: Number, required: true, unique: true},
     name: {type: String, required: true},
     original: {type: String, required: true},
+    original_credit: {type: String, required: true},
     keyword: {type: String, required: true},
     summary: {type: String, required: true}
   })

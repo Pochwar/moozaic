@@ -1,4 +1,5 @@
 import express from 'express'
+import multer from 'multer'
 import path from 'path'
 import ejs from 'ejs'
 import Controller from 'Controller'
@@ -7,6 +8,9 @@ export default class Server {
   constructor() {
     // init app server
     this._app = express()
+
+    // use multer for file uploads
+    const upload = multer({ dest: 'src/uploads' })
 
     // set public directory where to put client css an js files
     this._app.use(express.static(path.join(__dirname, '/../public')))
@@ -21,7 +25,8 @@ export default class Server {
     // Routes
     const controller = new Controller()
     this._app.get('/', controller.index.bind(controller))
-    this._app.get('/c', controller.create.bind(controller))
+    this._app.get('/create', controller.create.bind(controller))
+    this._app.post('/create', upload.single('original'), controller.store.bind(controller))
   }
 
   run() {

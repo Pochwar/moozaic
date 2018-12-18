@@ -24,7 +24,13 @@ export default class ProjectRepository {
   getLastId() {
     return new Promise((resolve, reject) => {
       this.projectModel.find({}).sort({id:-1}).limit(1)
-        .then(project => resolve(project[0].id))
+        .then(projects => {
+          if(projects.length == 0) {
+            resolve(0)
+          } else {
+            resolve(projects[0].id)
+          }
+        })
         .catch(err => reject(err))
     })
   }
@@ -37,6 +43,7 @@ export default class ProjectRepository {
         id: id,
         name: data.name,
         original: data.original,
+        original_credit: data.original_credit,
         keyword: data.keyword,
         summary: data.summary
       })

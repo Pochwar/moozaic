@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Moosaik</title>
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body>
+<header>
+  <h1>Create a project</h1>
+</header>
+<main>
+  <div>
+    <%if (err != '') { %>
+    <div>Error: <%= err %></div>
+    <% } %>
+    <%if (success != '') { %>
+    <div>Success: <%= success %></div>
+    <% } %>
+    <form action="create" method="post" enctype="multipart/form-data">
+      Name: <input type="text" name="name"><br>
+      Keyword: <input type="text" name="keyword"><br>
+      Original image: <input type="file" name="original"><br>
+      Image credit: <input type="text" name="original_credit"><br>
+      Summary:<br><textarea name="summary" id="" cols="30" rows="10"></textarea><br>
+      Admin password: <input type="password" name="pwd"><br>
+      <input type="submit" value="OK">
+    </form>
+  </div>
+</main>
+</body>
+</html>

@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-  <h1>Welcome to Moosaik :)</h1>
+  <h1><img src="img/moosaik-logo.png" alt="logo" height="50px">Moosaik<img src="img/moosaik-logo.png" alt="logo" height="50px"></h1>
 </header>
 <main>
   <article>
@@ -18,7 +18,8 @@
     <p>Released on: <%= project._id.getTimestamp().toDateString() %></p>
     <a href="img/mozaic_<%= project.id %>.png"><img src="img/mozaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px" target="_blank"></a>
     <h4>Original file:</h4>
-    <a href="originals/<%= project.original %>"><img src="originals/<%= project.original %>" alt="original file" width="250px" target="_blank"></a>
+    <a href="originals/<%= project.original %>"><img src="originals/<%= project.original %>" alt="original file" width="250px" target="_blank"></a><br>
+    Credit: <%= project.original_credit%>
     <h4>Keyword: #<%= project.keyword %></h4>
     <p>Contribute to this project sharing pictures on <a href="https://twitter.com">Twitter</a> using this keyword!</p>
   </article>

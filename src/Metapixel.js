@@ -5,7 +5,7 @@ const fs = require('fs')
 export default class Metapixel {
   run(library, keyword, original, id) {
     return new Promise((resolve, reject) => {
-      const source_folder = `${library}/${keyword}`
+      const source_folder = `${library}/${id}/${keyword}`
 
       // Count files in library
       fs.readdir(source_folder, (err, files) => {

@@ -21,6 +21,7 @@ export default class Giftuh {
 
   run(project) {
     const keyword = project.keyword
+    const project_id = project.id
     console.log('########################################')
     console.log(`# Looking for "${keyword}" images`)
     console.log('########################################')
@@ -42,7 +43,7 @@ export default class Giftuh {
           this.consoleLogYellow(`URL: ${media_url}`)
 
           // Set subfolder path where to save images
-          var path = `./src/giftuh/downloaded_images/${keyword}`
+          var path = `./src/giftuh/downloaded_images/${project_id}/${keyword}`
 
           // Create subfolder if not exist
           mkdirp(path, function (err) {
