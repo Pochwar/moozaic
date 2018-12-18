@@ -13,6 +13,9 @@ export default class Controller {
 
   async index(req, res) {
     const project = await this.projectRepository.getLastProject()
+    if (project == undefined){
+      res.send('no project defined :/')
+    }
     const contributions = await this.contributionRepository.getContributionsByProject(project.id)
     const contributors = contributions.map(contribution => {
       return contribution.tweet.user.name
@@ -44,9 +47,6 @@ export default class Controller {
   }
 
   async store(req, res, next) {
-    console.log('body', req.body)
-    console.log('file', req.file)
-
     // check password
     if (req.body.pwd == '' || req.body.pwd != conf.app_pwd) {
       res.redirect('/create?e=1')
