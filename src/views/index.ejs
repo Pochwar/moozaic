@@ -16,7 +16,7 @@
   <article>
     <h2>Project name: <%= project.name %></h2>
     <p>Released on: <%= project._id.getTimestamp().toDateString() %></p>
-    <a href="img/mozaic_<%= project.id %>.png"><img src="img/mozaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px" target="_blank"></a>
+    <a href="img/mosaics/mosaic_<%= project.id %>.png"><img src="img/mosaics/mosaic_<%= project.id %>.png" id="mozaic" alt="Here you should see a wonderful mozaïc" width="500px" target="_blank"></a>
     <h4>Original file:</h4>
     <a href="originals/<%= project.original %>"><img src="originals/<%= project.original %>" alt="original file" width="250px" target="_blank"></a><br>
     Credit: <%= project.original_credit%>

@@ -6,8 +6,8 @@ src/giftuh/downloaded_images/*
 src/metapixel/originals/*
 !src/metapixel/originals/.gitkeep
 
-public/img/*
-!public/img/moosaik-logo.png
+public/img/mosaics/*
+!public/img/mosaics/.gitkeep
 
 .env
 .idea/

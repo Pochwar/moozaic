@@ -35,7 +35,7 @@ export default class Metapixel {
   }
 
   async mozaic(id, source_folder, width, height, original, scale) {
-    const output=`public/img/mozaic_${id}.png`
+    const output=`public/img/mosaics/mosaic_${id}.png`
 
     console.log('\nPreparing miniatures')
     var { stdout, stderr } = await exec(`metapixel-prepare --recurse ${source_folder} src/metapixel/tmp_img --width=${width} --height=${height}`);
