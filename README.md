@@ -1,4 +1,4 @@
-# Moosaik
+# 🦌 Moosaik 🦌
 
 Moosaik is a project about creating mosaics with images get from Twitter.
 
@@ -36,15 +36,9 @@ Using GIFTUH and Metapixel, Moosaik will run and generate a mosaic for the most 
 
 ## Usage
 
-### Create the first project
-
-- Set 'RUN_GIFTUH' and 'RUN_METAPIXEL' to '0' in '.env' file and then run `npm start` to launch the server.
-- Go to 'http://localhost:2440/create' to create yout first project
-
-### Use Moosaik
-
-- Once the first project has been created, you can set 'RUN_GIFTUH' and 'RUN_METAPIXEL' to '1' in '.env' file and then run `npm start` to launch the server.
-- Then go to 'http://localhost:2440' to view the result
+- Run `npm start` to launch the server.
+- Go to 'http://localhost:2440' to view the default project
+- Go to 'http://localhost:2440/create' to create a new project
 
 Info : Metapixel won't trigger before there are at least 50 images recovered from twitter.
 
