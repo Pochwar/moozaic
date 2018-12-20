@@ -11,7 +11,8 @@ const ProjectSchema = new Schema(
     original: {type: String, required: true},
     original_credit: {type: String, required: true},
     keyword: {type: String, required: true},
-    summary: {type: String, required: true}
+    summary: {type: String},
+    last_nb_files: {type: Number, default: 0}
   })
 
 

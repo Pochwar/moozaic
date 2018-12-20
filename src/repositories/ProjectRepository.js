@@ -55,4 +55,19 @@ export default class ProjectRepository {
         })
     })
   }
+
+  updateNbFiles(id, nb) {
+    return new Promise((resolve, reject) => {
+      this.projectModel.updateOne(
+        {id: id},
+        {last_nb_files: nb}
+        )
+        .then(() => {
+          resolve()
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  }
 }

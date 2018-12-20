@@ -1,11 +1,14 @@
 var util = require('util')
 var exec = util.promisify(require('child_process').exec)
 const fs = require('fs')
+import ProjectRepository from 'repositories/ProjectRepository'
 
 export default class Metapixel {
-  run(library, keyword, original, id) {
+  run(project) {
     return new Promise((resolve, reject) => {
-      const source_folder = `${library}/${id}/${keyword}`
+      const projectRepository = new ProjectRepository()
+      const source_folder = `./src/giftuh/downloaded_images/${project.id}/${project.keyword}`
+      const original = `./src/metapixel/originals/${project.original}`
 
       // Count files in library
       fs.readdir(source_folder, (err, files) => {
@@ -17,11 +20,19 @@ export default class Metapixel {
           console.log('########################################')
           console.log(`# Number of files: ${files.length}`)
 
+          // check if there are enough files to create mozaic
           if (files.length < 50) {
             console.log('Not enough files, need at least 50 files.')
             resolve()
-          } else {
-            this.mozaic(id, source_folder, 250, 250, original, 3)
+          }
+          // check if files have been added since last mosaic build
+          else if (files.length == project.last_nb_files){
+            console.log('No files added since last build')
+            resolve()
+          }
+          else {
+            projectRepository.updateNbFiles(project.id, files.length)
+            this.mozaic(project.id, source_folder, 250, 250, original, 3)
               .then(() => {
                 resolve()
               })

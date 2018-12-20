@@ -8,7 +8,6 @@ import defaultProject from 'seed/project'
 
 // Configuration
 import conf from 'config'
-const library = './src/giftuh/downloaded_images'
 
 // Connect to DB
 const dbConnector = new DBConnector()
@@ -57,10 +56,9 @@ dbConnector.connect()
 
         // Get project
         const project = await projectRepository.getLastProject()
-        const original = `./src/metapixel/originals/${project.original}`
 
         // Run metapixel
-        metapixel.run(library, project.keyword, original, project.id)
+        metapixel.run(project)
           .then(() => {
             giftuh.unmute()
           })
