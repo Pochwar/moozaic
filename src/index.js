@@ -3,7 +3,8 @@ import Server from 'Server'
 import DBConnector from 'DBConnector'
 import Metapixel from 'Metapixel'
 import Giftuh from 'Giftuh'
-import ProjectRepository from "repositories/ProjectRepository"
+import ProjectRepository from 'repositories/ProjectRepository'
+import defaultProject from 'seed/project'
 
 // Configuration
 import conf from 'config'
@@ -18,6 +19,12 @@ dbConnector.connect()
     // get project
     const projectRepository = new ProjectRepository()
     let project = await projectRepository.getLastProject()
+
+    // Create default project if none
+    if (project == undefined) {
+      console.log('Create initial default project')
+      project = await projectRepository.createProject(defaultProject)
+    }
 
     // Launch server
     const server = new Server()
