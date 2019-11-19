@@ -45,9 +45,11 @@ Info : Metapixel won't trigger before there are at least 50 images recovered fro
 
 ## Heroku Deployment
 
-I deploy this app on Heroku (https://moosaik.herokuapp.com).
+UPDATE : The app is no longer on Heroku, I deployed it here instead : https://moosaik.pochworld.com/
 
-To achieve this, I had to make some specific actions:
+However, I leave the deployment procedure to those who would be interested:
+
+To deploy on Heroku:
 
 - Add "Apt" buildpack to install Metapixel: `heroku buildpacks:add --index 1 heroku-community/apt -a {your-app-name}`. Then, Metapixel will be automatically installed as it's referenced in the 'Aptfile'
 
